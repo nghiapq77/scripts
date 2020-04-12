@@ -1,0 +1,23 @@
+#!/bin/sh
+# Switch to left/right desktop and force ibus input method
+
+WIN_LIST=$(wmctrl -d)
+WIN_NUM=$(echo "$WIN_LIST" | wc -l)
+WIN_IDX=$(echo "$WIN_LIST" | grep \* | cut -d '*' -f 1)
+case "$1" in
+    left)
+        WIN_TARGET=$(expr $WIN_IDX - 1);
+        if [ "$WIN_TARGET" -lt "0" ]; then
+            WIN_TARGET=$(expr $WIN_NUM - 1)
+        fi;;
+    right)
+        WIN_TARGET=$(expr $WIN_IDX + 1);
+        if [ "$WIN_TARGET" -eq "$WIN_NUM" ]; then
+            WIN_TARGET=0
+        fi;;
+esac >/dev/null
+wmctrl -s $WIN_TARGET
+if [ "$WIN_TARGET" -ne "0" ]; then
+    ibus engine xkb:us::eng
+fi
+# ibus engine xkb:us::eng / Unikey
