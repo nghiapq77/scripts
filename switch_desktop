@@ -17,6 +17,6 @@ case "$1" in
         fi;;
 esac >/dev/null
 wmctrl -s $WIN_TARGET
-if [ "$WIN_TARGET" -ne "0" ] && [ "$(ibus engine)" = "Unikey" ]; then
+if [ "$WIN_TARGET" -ne "0" ] && [ "$(ibus engine)" = "Bamboo" ]; then
     ibus engine xkb:us::eng
 fi
