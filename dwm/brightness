@@ -1,0 +1,23 @@
+#!/bin/sh
+
+min_value=0
+max_value=$(cat /sys/class/backlight/intel_backlight/max_brightness)
+curr_value=$(cat /sys/class/backlight/intel_backlight/brightness)
+gap="$(echo "$max_value / 20" | bc -l)"
+gap=$(awk 'BEGIN{for (i=1; i<ARGC;i++) printf "%.0f\n", ARGV[i]}' "$gap") 
+
+case "$1" in
+    up)
+        target_value=$(echo $curr_value + $gap | bc -l)
+        if [ "$target_value" -gt "$max_value" ]; then
+            target_value=$max_value
+        fi;
+        echo $target_value;;
+    down)
+        target_value=$(echo $curr_value - $gap | bc -l)
+        if [ "$target_value" -lt "$min_value" ]; then
+            target_value=$min_value
+        fi;
+esac >/dev/null
+
+echo "$target_value" >/sys/class/backlight/intel_backlight/brightness

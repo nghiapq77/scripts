@@ -1,0 +1,14 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+    1) setsid "$TERMINAL" -e toggle_lang & ;;
+esac
+
+if [ "$(ibus engine)" = "Bamboo"  ]; then
+    LANG="VN"
+else
+    LANG="EN"
+fi
+
+#printf "%s" "$LANG"
+echo $LANG
