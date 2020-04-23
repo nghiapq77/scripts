@@ -21,3 +21,4 @@ case "$1" in
 esac >/dev/null
 
 echo "$target_value" >/sys/class/backlight/intel_backlight/brightness
+notify-send -u low -t 500 "Brightness: $(echo "scale=1; $target_value / $max_value * 100" | bc -l)%"

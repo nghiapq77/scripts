@@ -5,16 +5,19 @@
 
 case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e kcmshell5 kcm_networkmanagement & ;;
-	3) notify-send "🌐 Internet module" "\- Click to connect
-📡: no wifi connection
-📶: wifi connection with quality
-❎: no ethernet
-🌐: ethernet working
-" ;;
+	#3) notify-send "🌐 Internet module" "\- Click to connect
+#📡: no wifi connection
+#📶: wifi connection with quality
+#❎: no ethernet
+#🌐: ethernet working
+#" ;;
 esac
 
-grep -q "down" /sys/class/net/w*/operstate && wifiicon="📡" ||
-	wifiicon="$(grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }')"
+grep -q "down" /sys/class/net/w*/operstate && wifiicon="" ||
+	wifiicon="$(grep "^\s*w" /proc/net/wireless | awk '{ print "",int($3 * 100 / 70) "%" }')"
 
-#printf "%s %s\n" "$wifiicon" "$(/sys/class/net/e*/operstate)"
-printf "%s" "$wifiicon"
+printf " %s" "$wifiicon"
+#state=&(cat /sys/class/net/w*/operstate)
+#if grep -q "up" /sys/class/net/w*/operstate; then
+    #echo "up"
+#fi

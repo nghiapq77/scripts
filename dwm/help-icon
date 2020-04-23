@@ -9,9 +9,8 @@ ps ax | grep -q "\sdwm$" &&
 		restartwm() { i3 restart ;}
 
 case $BLOCK_BUTTON in
-    1) groff -mom "${READMEFILE:-${XDG_DATA_HOME:-$HOME/.local/share}/larbs/readme.mom}" -Tpdf | zathura - ;;
-    2) restartwm ;;
-    3) notify-send "❓ Help module" "\- Left click to open LARBS guide.
-- Middle click to refresh window manager.";;
-esac; echo "" 
-#echo "❓"
+    #1) groff -mom "${READMEFILE:-${XDG_DATA_HOME:-$HOME/.local/share}/larbs/readme.mom}" -Tpdf | zathura - ;;
+    1) notify-send -u critical -t 1000 "TUX YOU"
+    #2) restartwm ;;
+esac;
+echo " " 

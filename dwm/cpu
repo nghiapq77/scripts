@@ -9,4 +9,4 @@ case $BLOCK_BUTTON in
 esac
 
 #sensors | awk '/Core 0/ {print "🌡", $3}'
-lscpu | awk '/^CPU MHz/ {printf "%.2f GHz", $3 / 1000}'
+lscpu | awk '/^CPU MHz/ {printf "%.2fGHz", $3 / 1000}'
