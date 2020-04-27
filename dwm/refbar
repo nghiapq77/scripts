@@ -1,5 +1,5 @@
 #!/bin/sh
 
-# Refresh the dwmbar.
-# Send SIGTRAP signal to dwmbar script, which will handle it with a trap.
-pkill -SIGTRAP dwmbar
+pkill -RTMIN+3 dwmblocks  # battery
+pkill -RTMIN+4 dwmblocks  # internet
+pkill -RTMIN+1 dwmblocks  # time

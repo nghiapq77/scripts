@@ -6,7 +6,7 @@ cmds="\
 lock     : slock
 leave    : kill -TERM $(pidof -s dwm)
 refresh  : kill -HUP $(pidof -s dwm)
-reboot   : sudo -A reboot
+reboot   : reboot
 poweroff : poweroff
 "
 

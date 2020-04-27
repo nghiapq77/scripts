@@ -4,11 +4,9 @@ case $BLOCK_BUTTON in
     1) toggle_lang; kill -44 $(pidof dwmblocks);;
 esac
 
+LANG="EN"
 if [ "$(ibus engine)" = "Bamboo"  ]; then
     LANG="VN"
-else
-    LANG="EN"
 fi
 
-#printf "%s" "$LANG"
 echo $LANG

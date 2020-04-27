@@ -4,4 +4,4 @@ case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e kcmshell5 bluedevildevices & ;;
 esac
 
-printf "%s" ""
+printf "%s" ""
