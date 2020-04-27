@@ -19,10 +19,7 @@ ibus-daemon &
 dunst &
 libinput-gestures &
 xwallpaper --zoom $WALLPAPER &
-xset r rate 300 20 & 
-
-# Remap
-setxkbmap -option caps:escape &
+remaps &
 
 # Use xresources
 xrdb $XRESOURCES &
