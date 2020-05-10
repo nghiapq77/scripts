@@ -3,7 +3,7 @@
 min_value=0
 max_value=$(cat /sys/class/backlight/intel_backlight/max_brightness)
 curr_value=$(cat /sys/class/backlight/intel_backlight/brightness)
-gap=$(awk 'BEGIN{for (i=1; i<ARGC;i++) printf "%.0f\n", ARGV[i]}' "$(echo "$max_value / 20" | bc -l)") 
+gap=$(awk 'BEGIN{for (i=1; i<ARGC;i++) printf "%.0f\n", ARGV[i]}' "$(echo "$max_value / 15" | bc -l)") 
 echo $gap
 case "$1" in
     up)

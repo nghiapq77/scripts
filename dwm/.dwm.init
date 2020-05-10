@@ -5,7 +5,7 @@ export DWM_SCRIPTS="$HOME/.local/scripts/dwm"
 export TERMINAL="st"
 export BROWSER="brave-browser"
 export EDITOR="vim"
-export WALLPAPER="/home/oz/pics/guts_wall.png"
+export WALLPAPER="/home/oz/pics/wall.png"
 export XRESOURCES="/home/oz/.config/Xresources"
 
 # set PATH so it includes personal scripts if exists
@@ -13,19 +13,23 @@ if [ -d $DWM_SCRIPTS ] ; then
     PATH="$DWM_SCRIPTS:$PATH"
 fi
 
+# Status bar
+dwmblocks &
+
 # Start daemon
+xwallpaper --zoom $WALLPAPER &
+remaps &
 sxhkd &
 ibus-daemon &
 dunst &
+xcompmgr &
 libinput-gestures &
-xwallpaper --zoom $WALLPAPER &
-remaps &
 
 # Use xresources
 xrdb $XRESOURCES &
 
-# Status bar
-dwmblocks &
+# For brightness hotkey
+sudo chmod 777 /sys/class/backlight/intel_backlight/brightness
 
 # Run dwm
 exec dwm

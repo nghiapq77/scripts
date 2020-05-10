@@ -1,23 +1,14 @@
 #!/bin/sh
 
-# Prints the current volume or 🔇 if muted. Uses PulseAudio by default,
-# uncomment the ALSA lines if you remove PulseAudio.
-
 case $BLOCK_BUTTON in
         1) setsid "$TERMINAL" -e kcmshell5 kcm_pulseaudio & ;;
 esac
 
 # volstat="$(amixer get Master)" # ALSA only equivalent.
-
 #echo "$volstat" | grep -q "Mute: yes" && printf "🔇\\n" && exit
-#echo "$volstat" | grep -q "Mute: yes" && printf "\\n" && exit
-# echo "$volstat" | grep "\[off\]" >/dev/null && printf "🔇\\n" && exit # ALSA
-
-# vol=$(echo "$volstat" | grep -o "\[[0-9]\+%\]" | sed "s/[^0-9]*//g;1q") # ALSA
 # vol=$(amixer get Master | awk -F"[][]" '/dB/ { print $2  }' | sed 's/%//')
 
 volstat="$(pactl list sinks)"
-#vol="$(echo "$volstat" | grep '[0-9]\+%' | sed "s,.* \([0-9]\+\)%.*,\1,;1q")"
 echo "$volstat" | grep -q bluetooth && vol="$(echo "$volstat" | grep 'Volume: front-left:' | tac | sed "s,.* \([0-9]\+\)%.*,\1,;1q")" ||
     vol="$(echo "$volstat" | grep 'Volume: front-left:' | sed "s,.* \([0-9]\+\)%.*,\1,;1q")"
 
@@ -29,5 +20,5 @@ else
         icon=""
 fi
 
-echo "$volstat" | grep -q "Mute: yes" && icon=""
+echo "$volstat" | grep -q "Mute: yes" && icon="🔇"
 printf "%s %s%%\\n" "$icon" "$vol"

@@ -2,11 +2,11 @@
 
 # The clickable help menu. Middle click to restart wm.
 
-# If dwm is running, use dwm's readme and restart.
-ps ax | grep -q "\sdwm$" &&
-	READMEFILE=/usr/local/share/dwm/larbs.mom
-	restartwm() { pkill -HUP dwm ;} ||
-		restartwm() { i3 restart ;}
+## If dwm is running, use dwm's readme and restart.
+#ps ax | grep -q "\sdwm$" &&
+	#READMEFILE=/usr/local/share/dwm/larbs.mom
+	#restartwm() { pkill -HUP dwm ;} ||
+		#restartwm() { i3 restart ;}
 
 case $BLOCK_BUTTON in
     #1) groff -mom "${READMEFILE:-${XDG_DATA_HOME:-$HOME/.local/share}/larbs/readme.mom}" -Tpdf | zathura - ;;
