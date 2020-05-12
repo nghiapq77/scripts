@@ -1,11 +1,8 @@
 #!/bin/sh
 
-#date '+%b %d (%a) %I:%M'
-#echo "^c#8ec07c^^d^ $(LC_ALL=C date "+%b %d ^c#98971a^^d^ %H:%M")"
 echo " $(LC_ALL=C date "+%b %d  %H:%M")"
 
 case $BLOCK_BUTTON in
 	#1) notify-send "This Month" "$(cal --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/")" && notify-send "Appointments" "$(calcurse -D ~/.config/calcurse -d3)" ;;
-        1) notify-send "$(ncal -bh)";;
-	#2) $TERMINAL -e calcurse -D ~/.config/calcurse ;;
+        1) notify-send "$(cal -m)";;
 esac

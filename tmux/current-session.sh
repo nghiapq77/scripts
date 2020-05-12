@@ -2,14 +2,12 @@
 
 #if $(tmux has-session 2>/dev/null); then tmux -2u att; exit; fi
 tmux new-session -d -s void -c /home/oz/
-tmux new-window -n fs -t void:2 -c /home/oz/work/face-spoof
+tmux new-window -n fs -t void:2 -c /home/oz/works/face-spoof
 sleep 0.1
 tmux send-keys -t void:2.1 "source venv/bin/activate" Enter
 tmux new-window -n abn -t void:3 -c /home/oz/projects/abnormality-detection
 sleep 0.1
-tmux send-keys -t void:3.1 "source venv/bin/activate" Enter
-tmux new-window -t void:4 -c /home/oz/
-sleep 0.1
+tmux send-keys -t void:3.1 "conda activate abn" Enter
 tmux -2u att
 
 
