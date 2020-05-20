@@ -4,4 +4,6 @@ case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e bluetoothctl & ;;
 esac
 
-printf "%s" ""
+status="$(echo -e 'info' | bluetoothctl | awk '/Name:/ {printf $2}')"
+[ -z "$status" ] && echo " 0" 
+echo " $status"

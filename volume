@@ -5,7 +5,6 @@ case $BLOCK_BUTTON in
 esac
 
 # volstat="$(amixer get Master)" # ALSA only equivalent.
-#echo "$volstat" | grep -q "Mute: yes" && printf "🔇\\n" && exit
 # vol=$(amixer get Master | awk -F"[][]" '/dB/ { print $2  }' | sed 's/%//')
 
 volstat="$(pactl list sinks)"
@@ -20,5 +19,6 @@ else
         icon=""
 fi
 
-echo "$volstat" | grep -q "Mute: yes" && icon="🔇"
+#echo "$volstat" | grep -q "Mute: yes" && icon="🔇"
+echo "$volstat" | grep "Mute:" | tail -n1 | grep -q "yes" && icon="🔇"
 printf "%s %s%%\\n" "$icon" "$vol"
