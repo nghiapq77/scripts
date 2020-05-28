@@ -10,7 +10,5 @@ reboot   : reboot
 poweroff : poweroff
 "
 
-#shutdown : sudo -A shutdown -h now
-
 choice="$(echo "$cmds" | cut -d ':' -f 1 | dmenu)"
 `echo "$cmds" | grep "^$choice" | cut -d ':' -f2`

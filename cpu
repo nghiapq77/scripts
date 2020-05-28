@@ -5,6 +5,8 @@ case $BLOCK_BUTTON in
 	2) setsid "$TERMINAL" -e htop & ;;
 esac
 
-#(grep 'cpu ' /proc/stat; sleep 0.1; grep 'cpu ' /proc/stat) | awk -v RS="" '{ print ""($13-$2+$15-$4)*100/($13-$2+$15-$4+$16-$5)"%"}'
+# Current CPU utility
+(grep 'cpu ' /proc/stat; sleep 0.2; grep 'cpu ' /proc/stat) | awk -v RS="" '{ printf "%.0f%", ($13-$2+$15-$4)*100/($13-$2+$15-$4+$16-$5)}'
 
-lscpu | awk '/^CPU MHz/ {printf "%.2fGHz", $3 / 1000}'
+# Current CPU frequency
+#lscpu | awk '/^CPU MHz/ {printf "%.2fGHz", $3 / 1000}'

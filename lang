@@ -1,7 +1,6 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-    #1) toggle_lang; kill -44 $(pidof dwmblocks);;
     1) toggle_lang; pkill -RTMIN+11 dwmblocks;;
 esac
 

@@ -1,16 +1,9 @@
 #!/bin/sh
 
-# The clickable help menu. Middle click to restart wm.
-
-## If dwm is running, use dwm's readme and restart.
-#ps ax | grep -q "\sdwm$" &&
-	#READMEFILE=/usr/local/share/dwm/larbs.mom
-	#restartwm() { pkill -HUP dwm ;} ||
-		#restartwm() { i3 restart ;}
-
 case $BLOCK_BUTTON in
     #1) groff -mom "${READMEFILE:-${XDG_DATA_HOME:-$HOME/.local/share}/larbs/readme.mom}" -Tpdf | zathura - ;;
-    1) notify-send -u critical -t 1000 "TUX YOU"
-    #2) restartwm ;;
+    1) notify-send -u critical -t 1000 "TUX YOU";;
+    2) st -e vim ~/.local/src/dwm/config.h;;    
+    3) st -e vim ~/.local/src/dwmblocks/config.h;;    
 esac;
 echo " " 
