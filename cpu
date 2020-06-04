@@ -6,7 +6,7 @@ case $BLOCK_BUTTON in
 esac
 
 # Current CPU utility
-(grep 'cpu ' /proc/stat; sleep 0.2; grep 'cpu ' /proc/stat) | awk -v RS="" '{ printf "%.0f%", ($13-$2+$15-$4)*100/($13-$2+$15-$4+$16-$5)}'
+(grep 'cpu ' /proc/stat; sleep 0.2; grep 'cpu ' /proc/stat) | awk -v RS="" '{ printf "%2.0f%", ($13-$2+$15-$4)*100/($13-$2+$15-$4+$16-$5)}'
 
 # Current CPU frequency
 #lscpu | awk '/^CPU MHz/ {printf "%.2fGHz", $3 / 1000}'
