@@ -6,3 +6,4 @@ disconnect : xrandr --output HDMI-1 --off"
 
 choice="$(echo "$cmds" | cut -d ':' -f 1 | dmenu -i -p 'Monitor')"
 `echo "$cmds" | grep "^$choice" | cut -d ':' -f2`
+xwallpaper --zoom ~/.local/config/wall.png
