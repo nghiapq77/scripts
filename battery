@@ -8,6 +8,7 @@ do
     status=$(sed "s/Discharging//;s/Not charging//;s/Charging/⚡/;s/Unknown/♻️/;s/Full/⚡/" "$battery"/status)
     batticon=""
     # If it is discharging and 25% or less, we will add a ❗ and send warning notify.
+    [ "$capacity" -le 50 ] && [ "$status" != "⚡" ] && status="❗" && notify-send -u normal "HALF BATTERY"
     [ "$capacity" -le 35 ] && [ "$status" != "⚡" ] && status="❗" && notify-send -u critical "LOW BATTERY"
     echo "$batticon $status$capacity%" 
     unset warn
