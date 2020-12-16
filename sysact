@@ -3,10 +3,12 @@
 # A dmenu wrapper script for system functions.
 
 cmds="\
+nothing  :
 lock     : slock
 leave    : kill -TERM $(pidof -s dwm)
 refresh  : kill -HUP $(pidof -s dwm)
 reboot   : reboot
+suspend  : systemctl suspend
 poweroff : poweroff
 "
 

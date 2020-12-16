@@ -1,9 +1,6 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-    #1) groff -mom "${READMEFILE:-${XDG_DATA_HOME:-$HOME/.local/share}/larbs/readme.mom}" -Tpdf | zathura - ;;
     1) notify-send -u critical -t 1000 "TUX YOU";;
-    2) st -e vim ~/.local/src/dwm/config.h;;    
-    3) st -e vim ~/.local/src/dwmblocks/config.h;;    
 esac;
 echo " " 
