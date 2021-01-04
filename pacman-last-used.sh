@@ -88,7 +88,7 @@ function pacman-last-used {
     }
 
 
-    setOSspecifics
+    #setOSspecifics
 
     echo ""
 

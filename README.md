@@ -1,1 +1,1 @@
-# My personal scripts
+# Personal scripts
