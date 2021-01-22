@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if xrandr --listactivemonitors | grep -q HDMI; then
+    xrandr --output HDMI-1 --off
+else
+    xrandr --output HDMI-1 --auto --left-of eDP-1
+fi
+xwallpaper --zoom ~/.local/config/wall.png
