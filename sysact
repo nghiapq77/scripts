@@ -3,14 +3,12 @@
 # A dmenu wrapper script for system functions.
 
 cmds="\
-nothing  :
 lock     : slock
 leave    : kill -TERM $(pidof -s dwm)
 refresh  : kill -HUP $(pidof -s dwm)
 reboot   : reboot
 suspend  : systemctl suspend
-poweroff : poweroff
-"
+poweroff : poweroff"
 
-choice="$(echo "$cmds" | cut -d ':' -f 1 | dmenu)"
+choice="$(echo "$cmds" | cut -d ':' -f 1 | dmenu -p 'System action:')" || exit
 `echo "$cmds" | grep "^$choice" | cut -d ':' -f2`
