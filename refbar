@@ -1,6 +1,0 @@
-#!/bin/sh
-
-pkill -RTMIN+1 dwmblocks  # time
-pkill -RTMIN+3 dwmblocks  # battery
-pkill -RTMIN+4 dwmblocks  # internet
-pkill -RTMIN+5 dwmblocks  # bluetooth

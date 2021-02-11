@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TOGGLE=$SCRIPTS/.toggle_redshift
+TOGGLE=$XDG_CACHE_HOME/toggle_redshift
 
 if [ ! -e $TOGGLE ]; then
     touch $TOGGLE
