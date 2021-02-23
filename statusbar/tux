@@ -2,5 +2,6 @@
 
 case $BLOCK_BUTTON in
     1) notify-send -u critical -t 1000 "TUX YOU";;
+    2) sysact;;
 esac;
 echo " " 

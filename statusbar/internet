@@ -2,6 +2,7 @@
 
 case $BLOCK_BUTTON in
 	1) setsid "$TERMINAL" -e nmtui & ;;
+	2) wifi_selector ;;
 esac
 
 grep -q "down" /sys/class/net/w*/operstate && wifiicon="" ||
