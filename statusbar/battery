@@ -1,11 +1,12 @@
 #!/bin/sh
 
 # Loop through all attached batteries.
-for battery in /sys/class/power_supply/BAT?
-do
+for battery in /sys/class/power_supply/BAT?*; do
+    # If non-first battery, print a space separator.
+    [ -n "${capacity+x}" ] && printf " "
+
     # Sets up the status and capacity
-    status=$(cat "$battery/status")
-    case "$status" in
+    case "$(cat "$battery/status")" in
             "Full") status="⚡" ;;
             "Discharging") status="" ;;
             "Charging") status="⚡" ;;
@@ -20,4 +21,4 @@ do
 
     # Output battery info
     echo " $status$capacity%" 
-done && return 0
+done && exit 0
