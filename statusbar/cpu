@@ -43,5 +43,5 @@ IOW=$(change 5)
 ACTIVE=$(( USR + SYS + IOW ))
 TOTAL=$((ACTIVE + IDLE))
 PCT=$(( ACTIVE * 100 / TOTAL ))
-echo "$PCT%"
+echo " $PCT%"
 echo "$ENDSTAT" > "$cache"

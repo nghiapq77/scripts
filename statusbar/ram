@@ -5,4 +5,4 @@ case $BLOCK_BUTTON in
         2) setsid -f "$TERMINAL" -e htop ;;
 esac
 
-free -h | sed -n '2{p;q}' | awk '{print "", $3}'
+free -h | sed -n '2{p;q}' | awk '{print "", $3}'
