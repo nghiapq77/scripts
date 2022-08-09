@@ -2,8 +2,8 @@
 # Credit: https://codereview.stackexchange.com/a/62429
 
 case $BLOCK_BUTTON in
-	1) notify-send " CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)\\n(100% per core)" ;;
-	2) setsid -f "$TERMINAL" -e htop ;;
+    1) notify-send " CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)\\n(100% per core)" ;;
+    2) setsid -f "$TERMINAL" -e htop ;;
 esac
 
 getstat() {
@@ -43,5 +43,6 @@ IOW=$(change 5)
 ACTIVE=$(( USR + SYS + IOW ))
 TOTAL=$((ACTIVE + IDLE))
 PCT=$(( ACTIVE * 100 / TOTAL ))
-echo " $PCT%"
+TEMP=$(sensors | awk '/CPU:/ {print $2}')
+echo " $PCT% $TEMP"
 echo "$ENDSTAT" > "$cache"

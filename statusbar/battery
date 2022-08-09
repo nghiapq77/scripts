@@ -1,5 +1,10 @@
 #!/bin/sh
 
+case $BLOCK_BUTTON in
+    1) notify-send "$(acpi -b)";;
+    3) notify-send "$(acpi -i)";;
+esac
+
 # Loop through all attached batteries.
 for battery in /sys/class/power_supply/BAT?*; do
     # If non-first battery, print a space separator.
@@ -7,18 +12,18 @@ for battery in /sys/class/power_supply/BAT?*; do
 
     # Sets up the status and capacity
     case "$(cat "$battery/status")" in
-            "Full") status="⚡" ;;
-            "Discharging") status="" ;;
-            "Charging") status="⚡" ;;
-            "Not charging") status="" ;;
-            "Unknown") status="♻️" ;;
+        "Full") status="" ;;
+        "Discharging") status="" ;;
+        "Charging") status="🔌" ;;
+        "Not charging") status="" ;;
+        "Unknown") status="♻️" ;;
     esac
     capacity=$(cat "$battery/capacity")
 
-    # Will make a warn variable if discharging and low
-    [ "$capacity" -le 50 ] && [ "$status" != "⚡" ] && status="❗" && notify-send -u normal "HALF BATTERY"
-    [ "$capacity" -le 35 ] && [ "$status" != "⚡" ] && status="❗" && notify-send -u critical "LOW BATTERY"
+    # Will make a warn icon if discharging and low
+    [ "$capacity" -le 50 ] && [ "$status" != "🔌" ] && status=""
+    [ "$capacity" -le 25 ] && [ "$status" != "🔌" ] && status=""
 
     # Output battery info
-    echo " $status$capacity%" 
+    printf "%s" "$status $capacity%" 
 done && exit 0

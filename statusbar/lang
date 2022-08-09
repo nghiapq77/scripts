@@ -5,7 +5,7 @@ case $BLOCK_BUTTON in
 esac
 
 LANG="EN"
-if [ "$(ibus engine)" = "Bamboo"  ]; then
+if [ "$(ibus engine)" = "Bamboo" ]; then
     LANG="VN"
 fi
 

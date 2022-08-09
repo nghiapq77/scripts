@@ -1,9 +1,24 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-	1) setsid "$TERMINAL" -e bluetoothctl & ;;
+    1) setsid "$TERMINAL" -e bluetoothctl & ;;
 esac
 
-status="$(echo -e 'info' | bluetoothctl | awk '/Name:/ {printf $2}')"
-[ -z "$status" ] && echo " 0" && exit 0
-echo " $status"
+icon=""
+status=""
+echo -e 'list' | bluetoothctl | grep -q Controller
+if [ $? == 0 ]; then
+    # Bluetooth is on
+    info="$(echo -e 'info' | bluetoothctl)"
+    status="$(echo "$info" | awk '/Name:/ {printf $2}')"
+    if [ -z "$status" ]; then
+        # No device connected
+        status=""
+    else
+        # Get battery percentage if exists
+        # TODO: check with other device
+        battery="$(echo "$info" | awk '/Battery/ {printf $4}' | cut -d "(" -f2 | cut -d ")" -f1)"
+        [ ! -z "$battery" ] && status+=" $battery%"
+    fi
+fi
+echo "$icon $status"
