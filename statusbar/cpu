@@ -1,9 +1,11 @@
 #!/bin/sh
-# Credit: https://codereview.stackexchange.com/a/62429
+# Credit:
+# https://codereview.stackexchange.com/a/62429
+# https://superuser.com/questions/1776718/getting-average-cpu-frequency
 
 case $BLOCK_BUTTON in
     1) notify-send " CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)\\n(100% per core)" ;;
-    2) setsid -f "$TERMINAL" -e htop ;;
+    2) setsid -f "$TERMINAL" -e btop ;;
 esac
 
 getstat() {
@@ -43,6 +45,7 @@ IOW=$(change 5)
 ACTIVE=$(( USR + SYS + IOW ))
 TOTAL=$((ACTIVE + IDLE))
 PCT=$(( ACTIVE * 100 / TOTAL ))
-TEMP=$(sensors | awk '/CPU:/ {print $2}')
-echo " $PCT% $TEMP"
+FREQ=$(grep MHz /proc/cpuinfo | awk '{print $4}' | awk '{freq+=$1;n++} END{printf("%.1f", freq/n/1000);}')
+TEMP=$(sensors | awk '/CPU:/ {print $2}' | grep -o '[0-9,.]\+' | awk '{printf("%i", $1)}')
+echo " $PCT% ${FREQ}GHz $TEMP°C"
 echo "$ENDSTAT" > "$cache"

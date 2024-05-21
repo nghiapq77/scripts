@@ -5,15 +5,15 @@ case $BLOCK_BUTTON in
 esac
 
 icon=""
-status=""
+status=" "
 echo -e 'list' | bluetoothctl | grep -q Controller
 if [ $? == 0 ]; then
     # Bluetooth is on
     info="$(echo -e 'info' | bluetoothctl)"
-    status="$(echo "$info" | awk '/Name:/ {printf $2}')"
+    status="$(echo "$info" | awk '/Alias:/ {$1=""; print}')"
     if [ -z "$status" ]; then
         # No device connected
-        status=""
+        status=" "
     else
         # Get battery percentage if exists
         # TODO: check with other device
@@ -21,4 +21,4 @@ if [ $? == 0 ]; then
         [ ! -z "$battery" ] && status+=" $battery%"
     fi
 fi
-echo "$icon $status"
+echo "$icon$status"

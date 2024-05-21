@@ -2,6 +2,7 @@
 
 case $BLOCK_BUTTON in
     1) setsid -f pavucontrol ;;
+    2) pamixer -t; pkill -RTMIN+10 dwmblocks ;;
 esac
 
 volstat="$(pactl list sinks)"
