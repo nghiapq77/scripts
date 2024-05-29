@@ -1,0 +1,12 @@
+#!/bin/sh
+
+case "$1" in
+    up)
+        sudo systemctl start warp-svc.service && sleep 0.8 && warp-cli connect
+        echo "Cloudflare WARP up";;
+    down)
+        warp-cli disconnect && sudo systemctl stop warp-svc.service
+        echo "Cloudflare WARP down";;
+    status)
+        warp-cli status;;
+esac

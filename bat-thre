@@ -1,0 +1,33 @@
+#!/bin/sh
+
+case "$1" in
+    get | -g)
+        for battery in /sys/class/power_supply/BAT*; do
+            start=$(cat "$battery/charge_control_start_threshold")
+            end=$(cat "$battery/charge_control_end_threshold")
+            echo $battery $start $end
+        done
+        ;;
+    set | -s)
+        if [ "$#" -ne 4 ]; then
+            echo "Setting battery thresholds must have start and stop thresholds"
+            exit 1
+        fi
+        echo $4 | sudo tee "/sys/class/power_supply/BAT$2/charge_control_end_threshold" >/dev/null
+        echo $3 | sudo tee "/sys/class/power_supply/BAT$2/charge_control_start_threshold" >/dev/null
+        echo "Battery $2 start threshold:" "$(cat /sys/class/power_supply/BAT$2/charge_control_start_threshold)"
+        echo "Battery $2 end threshold:" "$(cat /sys/class/power_supply/BAT$2/charge_control_end_threshold)"
+        ;;
+    fullcharge | -f)
+        echo 0 | sudo tee /sys/class/power_supply/BAT*/charge_control_start_threshold >/dev/null
+        echo 100 | sudo tee /sys/class/power_supply/BAT*/charge_control_end_threshold >/dev/null
+        bat-thre -g
+        ;;
+    customcharge | -c)
+        echo 80 | sudo tee /sys/class/power_supply/BAT*/charge_control_start_threshold >/dev/null
+        echo 81 | sudo tee /sys/class/power_supply/BAT*/charge_control_end_threshold >/dev/null
+        bat-thre -g
+        ;;
+    *)
+        echo "'$1' not supported";;
+esac
