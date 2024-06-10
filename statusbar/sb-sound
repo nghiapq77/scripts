@@ -2,7 +2,7 @@
 
 case $BLOCK_BUTTON in
     1) setsid -f pavucontrol ;;
-    2) pamixer -t; pkill -RTMIN+10 dwmblocks ;;
+    2) wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ;;
 esac
 
 volstat="$(pactl list sinks)"
@@ -10,7 +10,6 @@ echo "$volstat" | grep -q bluetooth && vol="$(echo "$volstat" | grep 'Volume: fr
     vol="$(echo "$volstat" | grep 'Volume: front-left:' | sed "s,.* \([0-9]\+\)%.*,\1,;1q")"
 
 icon=""
-echo "$volstat" | grep "Active" | grep -q "head" && icon=""
+echo "$volstat" | grep "Active" | grep -q "head" && icon=""
 echo "$volstat" | grep "Mute:" | tail -n1 | grep -q "yes" && icon=""
-
 echo "$icon $vol%"

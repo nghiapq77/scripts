@@ -1,0 +1,8 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+    1) notify-send -u critical -t 1000 "TUX YOU";;
+    2) kill -HUP $(pidof -s dwm) && notify-send -t 2000 "dwm" "Restarted";;
+    3) pkill -USR1 dwmblocks && notify-send -t 2000 "dwmblocks" "Restarted";;
+esac;
+echo " " 
