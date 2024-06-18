@@ -7,6 +7,12 @@ case "$1" in
     down)
         warp-cli disconnect && sudo systemctl stop warp-svc.service
         echo "Cloudflare WARP down";;
-    status)
+    status | s)
         warp-cli status;;
+    connect | c)
+        warp-cli connect;;
+    disconnect | d)
+        warp-cli disconnect;;
+    *)
+        echo "Argument $1 not supported";;
 esac
