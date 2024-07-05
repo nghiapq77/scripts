@@ -2,10 +2,9 @@
 
 id=$(xinput list | sed '/Synaptics/s/.*id=\([0-9]*\).*/\1/;t;d')
 enabled=$(xinput list-props "$id" | grep '\bDevice Enabled\b' | sed 's/.*\(.\)$/\1/')
+
 if [ $enabled == 1 ]; then
-    notify-send "Disabling touchpad"
-    xinput disable $id
+    xinput disable $id && notify-send "Touchpad" "Disabled"
 else
-    notify-send "Enabling touchpad"
-    xinput enable $id
+    xinput enable $id && notify-send "Touchpad" "Enabled"
 fi

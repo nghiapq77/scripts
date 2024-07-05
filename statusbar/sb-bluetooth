@@ -1,7 +1,8 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-    1) setsid "$TERMINAL" -e bluetoothctl & ;;
+    2) setsid "$TERMINAL" -e bluetoothctl & ;;
+    3) dmenu_bluetooth ;;
 esac
 
 icon=""

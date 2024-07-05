@@ -1,8 +1,8 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-    1) setsid -f pavucontrol ;;
-    2) wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ;;
+    2) setsid -f pavucontrol ;;
+    3) wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ;;
 esac
 
 volstat="$(pactl list sinks)"

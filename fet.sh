@@ -1,5 +1,5 @@
 #!/bin/sh
-#
+# Source: https://github.com/eepykate/fet.sh
 #    fet.sh
 #  a fetch in pure POSIX shell
 #
@@ -70,7 +70,7 @@ if [ -e /proc/$$/comm ]; then
 	while read -r line; do
 		eq "$line" 'MemTotal*' && set -- $line && break
 	done < /proc/meminfo
-	mem="$(( $2 / 1000 ))MB"
+	mem="$(( $2 / 1000000 ))GB"
 
 	## Processor
 	while read -r line; do
@@ -211,8 +211,6 @@ elif v=/System/Library/CoreServices/SystemVersion.plist; [ -f "$v" ]; then
 		esac
 	done < "$v"
 fi
-
-eq "$0" '*fetish' && printf 'Step on me daddy\n' && exit
 
 # help i dont know if it's a capital consistently
 eq "$wm" '*[Gg][Nn][Oo][Mm][Ee]*' && wm='foot DE'

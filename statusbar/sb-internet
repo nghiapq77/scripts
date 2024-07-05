@@ -1,8 +1,8 @@
 #!/bin/sh
 
 case $BLOCK_BUTTON in
-    1) setsid -f "$TERMINAL" -e nmtui ;;
-    2) wifi_selector ;;
+    2) setsid -f "$TERMINAL" -e nmtui ;;
+    3) dmenu_wifi ;;
 esac
 
 # Wifi
