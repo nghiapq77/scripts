@@ -8,7 +8,7 @@ esac
 icon=""
 status=" "
 echo -e 'list' | bluetoothctl | grep -q Controller
-if [ $? == 0 ]; then
+if [ $? = 0 ]; then
     # Bluetooth is on
     info="$(echo -e 'info' | bluetoothctl)"
     status="$(echo "$info" | awk '/Alias:/ {$1=""; print}')"

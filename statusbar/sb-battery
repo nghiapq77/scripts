@@ -2,6 +2,7 @@
 
 case $BLOCK_BUTTON in
     1) notify-send "$(acpi -b)";;
+    2) pkill -37 dwmblocks;;
     3) notify-send "$(acpi -i)";;
 esac
 
@@ -11,31 +12,31 @@ output=""
 
 # Loop through all attached batteries.
 for battery in /sys/class/power_supply/BAT?*; do
-    # Sets up the status and capacity
-    case "$(cat "$battery/status")" in
-        "Full") status="" ;;
-        "Discharging") status="" ;;
-        "Charging") status="🔌" ;;
-        "Not charging") status="" ;;
-        "Unknown") status="♻️" ;;
+    # Get battery status and set icon
+    status="$(cat "$battery/status")"
+    case $status in
+        "Full") icon="" ;;
+        "Discharging") icon="" ;;
+        "Charging") icon="" ;;
+        "Not charging") icon="" ;;
+        "Unknown") icon="♻️" ;;
     esac
+
+    # Get battery capacity
     capacity=$(cat "$battery/capacity")
 
-    # Will make a low battery icon if discharging and low
-    [ "$capacity" -le 50 ] && [ "$status" != "🔌" ] && status=""
-    [ "$capacity" -le 25 ] && [ "$status" != "🔌" ] && status=""
-
-    # Output battery info
-    #printf "%s" "$status $capacity%" 
+    # Make low battery icon if discharging and low
+    [ "$capacity" -le 50 ] && [ "$status" != "Charging" ] && icon=""
+    [ "$capacity" -le 25 ] && [ "$status" != "Charging" ] && icon=""
 
     # Concatenate batteries' info
-    output="${output}$status $capacity% "
+    output="${output}$icon $capacity% "
 
     # Calculate total battery percentage
     PCT=`expr $PCT + $capacity`
 
-    # TODO check charging status more elegantly
-    [ "$status" == "🔌" ] && [ "$IS_CHARGING" != 1 ] && IS_CHARGING=1
+    # Set charging status
+    [ "$status" = "Charging" ] && IS_CHARGING=1
 done
 
 # Send notify if total battery percentage < 20
