@@ -1,11 +1,11 @@
 #!/bin/sh
 
-TOGGLE=$XDG_CACHE_HOME/toggle_redshift
+TOGGLE="$XDG_CACHE_HOME"/toggle_redshift
 
 if [ -f "$TOGGLE" ]; then
-    rm $TOGGLE
+    rm "$TOGGLE"
     redshift -x
 else
-    touch $TOGGLE
+    touch "$TOGGLE"
     redshift -P -O 4000 -b 1
 fi

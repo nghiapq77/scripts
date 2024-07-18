@@ -12,4 +12,4 @@ cmds="\
  poweroff    : systemctl poweroff -i"
 
 choice="$(echo "$cmds" | cut -d ':' -f 1 | dmenu -l 7 -p 'System action:')" || exit
-`echo "$cmds" | grep "^$choice" | cut -d ':' -f2`
+eval "$(echo "$cmds" | grep "^$choice" | cut -d ':' -f2)"

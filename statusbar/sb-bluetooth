@@ -7,19 +7,17 @@ esac
 
 icon=""
 status=" "
-echo -e 'list' | bluetoothctl | grep -q Controller
-if [ $? = 0 ]; then
+if echo 'list' | bluetoothctl | grep -q Controller; then
     # Bluetooth is on
-    info="$(echo -e 'info' | bluetoothctl)"
+    info="$(echo 'info' | bluetoothctl)"
     status="$(echo "$info" | awk '/Alias:/ {$1=""; print}')"
     if [ -z "$status" ]; then
         # No device connected
         status=" "
     else
         # Get battery percentage if exists
-        # TODO: check with other device
         battery="$(echo "$info" | awk '/Battery/ {printf $4}' | cut -d "(" -f2 | cut -d ")" -f1)"
-        [ ! -z "$battery" ] && status+=" $battery%"
+        [ -n "$battery" ] && status="$status $battery%"
     fi
 fi
 echo "$icon$status"
